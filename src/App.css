@@ -19,10 +19,15 @@
 
 .layout > main {
   grid-area: main;
-  padding: 10px;
 }
 
 .layout > footer {
   grid-area: foot;
 }
 
+.lay-lf {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+}
