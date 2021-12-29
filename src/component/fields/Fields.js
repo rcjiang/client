@@ -17,15 +17,15 @@ const columns = [
   }
 ];
 
-function createData(fieldName, valueType, sourceType) {
-  return { fieldName, valueType, sourceType };
+function createData(id, fieldName, valueType, sourceType) {
+  return {id, fieldName, valueType, sourceType };
 }
 
 const rows = [
-  createData('作者', 'int', 'table'),
-  createData('创作日期', 'date', 'input'),
-  createData('体裁', 'int', 'key-value'),
-  createData('主题', 'string', 'collect'),
+  createData(1, '作者', 'int', 'table'),
+  createData(2, '创作日期', 'date', 'input'),
+  createData(3, '体裁', 'int', 'key-value'),
+  createData(4, '主题', 'string', 'collect'),
 ];
 
 function Fields() {
@@ -47,7 +47,7 @@ function Fields() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map(column => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -63,17 +63,16 @@ function Fields() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
+                  <TableRow hover tabIndex={-1} key={row.id}>
+                    { columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            { value }
+                          </TableCell>
+                        );
+                      })
+                    }
                   </TableRow>
                 );
               })}

@@ -7,13 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const data = [
-    '作品',
-    '作者',
-    '体裁'
-]
-
-function Entities () {
+function Entities ({ data }) {
     const Action = (
         <IconButton edge="end" aria-label="delete">
             <DeleteIcon />
