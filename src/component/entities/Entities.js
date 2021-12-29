@@ -1,43 +1,49 @@
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ListItemButton } from '@mui/material';
+import './List.css';
 
-function Entities ({ data }) {
-    const Action = (
-        <IconButton edge="end" aria-label="delete">
-            <DeleteIcon />
-        </IconButton>
-    )
+function Entities ({ data, selected, handleSelect }) {
+  const Action = (
+    <IconButton edge="end" aria-label="delete">
+      <DeleteIcon />
+    </IconButton>
+  )
 
-    const Items = data.map(item => (
-        <ListItem
-            key={item}
-            secondaryAction={ Action }
-        >
-            <ListItemAvatar>
-                <Avatar>
-                    <FolderIcon />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-                primary={item}
-            />
-        </ListItem>
-    ))
+  const Items = data.map(({ id, name }) => (
+    <ListItem
+      key={id}
+      className="MuiListItem-hover"
+      secondaryAction={ Action }
+      disablePadding
+    >
+      <ListItemButton
+        selected={selected === id}
+        onClick={() => handleSelect(id) }
+      >
+        <ListItemIcon sx={{ minWidth: '36px' }}>
+          <FolderIcon />
+        </ListItemIcon>
+        <ListItemText
+          primary={name}
+        />
+      </ListItemButton>
+    </ListItem>
+  ))
 
-    return (
-        <List
-            dense={true}
-            sx={{ width: '200px', borderRight: 1, borderColor: 'divider' }}
-        > 
-            {Items}
-        </List>
-    )
+  return (
+    <List
+      dense={true}
+      sx={{ minWidth: '240px', borderRight: 1, borderColor: 'divider' }}
+    > 
+      {Items}
+    </List>
+  )
 }
 
 export default Entities

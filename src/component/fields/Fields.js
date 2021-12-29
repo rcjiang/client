@@ -17,18 +17,7 @@ const columns = [
   }
 ];
 
-function createData(id, fieldName, valueType, sourceType) {
-  return {id, fieldName, valueType, sourceType };
-}
-
-const rows = [
-  createData(1, '作者', 'int', 'table'),
-  createData(2, '创作日期', 'date', 'input'),
-  createData(3, '体裁', 'int', 'key-value'),
-  createData(4, '主题', 'string', 'collect'),
-];
-
-function Fields() {
+function Fields({ data }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -59,19 +48,19 @@ function Fields() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover tabIndex={-1} key={row.id}>
                     { columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            { value }
-                          </TableCell>
-                        );
-                      })
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          { value }
+                        </TableCell>
+                      );
+                    })
                     }
                   </TableRow>
                 );
@@ -82,7 +71,7 @@ function Fields() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

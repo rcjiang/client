@@ -1,0 +1,7 @@
+.MuiListItem-hover .MuiListItemSecondaryAction-root {
+  visibility: hidden;
+}
+
+.MuiListItem-hover:hover .MuiListItemSecondaryAction-root {
+  visibility: visible;
+}
