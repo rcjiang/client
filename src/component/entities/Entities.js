@@ -3,15 +3,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
-import FolderIcon from '@mui/icons-material/Folder';
-import DeleteIcon from '@mui/icons-material/Delete';
+import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { ListItemButton } from '@mui/material';
 import './List.css';
 
 function Entities ({ data, selected, handleSelect }) {
   const Action = (
-    <IconButton edge="end" aria-label="delete">
-      <DeleteIcon />
+    <IconButton edge="end" aria-label="delete" size="small">
+      <DeleteOutlinedIcon />
     </IconButton>
   )
 
@@ -27,7 +27,7 @@ function Entities ({ data, selected, handleSelect }) {
         onClick={() => handleSelect(id) }
       >
         <ListItemIcon sx={{ minWidth: '36px' }}>
-          <FolderIcon />
+          <FolderOutlinedIcon />
         </ListItemIcon>
         <ListItemText
           primary={name}
