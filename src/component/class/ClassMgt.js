@@ -1,32 +1,26 @@
 import { useEffect, useState } from 'react';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import Entities from '../entities/Entities';
-import Fields from '../fields/Fields';
 import { getEntityList } from '../../apis/entity'
-import { getFields } from '../../apis/field'
-
 
 function ClassMgt () {
+  const { entityId } = useParams()
   const [entityNames, setEntityNames] = useState([])
-  const [selectedEntity, setSelectedEntity] = useState(0)
-  const [fieldList, setFieldList] = useState([])
+  const navigate = useNavigate()
+
+  const changeSelect = id => {
+    navigate(String(id))
+  }
 
   useEffect(() => {
     getEntityList().then(data => {
       setEntityNames(data)
-      const firstId = data[0]?.id
-      if (firstId) {
-        setSelectedEntity(firstId)
-        queryFields(firstId)
+      const firstEntityId = data[0]?.id
+      if (!entityId && firstEntityId) {
+        navigate(String(firstEntityId))
       }
     })
-  }, [])
-
-  const queryFields = id => {
-    setSelectedEntity(id)
-    getFields(id).then(data => {
-      setFieldList(data)
-    })
-  }
+  }, [entityId, navigate])
 
   return (
     <div
@@ -35,11 +29,11 @@ function ClassMgt () {
     >
       <Entities
         data={entityNames}
-        handleSelect={queryFields}
-        selected={selectedEntity}
+        handleSelect={changeSelect}
+        selected={Number(entityId)}
       />
       <div style={{paddingLeft:  '10px' }}>
-        <Fields data={fieldList} />
+        <Outlet />
       </div>
     </div>
   )

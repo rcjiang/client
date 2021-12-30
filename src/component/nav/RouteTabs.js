@@ -19,7 +19,7 @@ function RouteTabs () {
     >
       <Tab
         component={Link}
-        to='/'
+        to='/entity'
         icon={<FitbitIcon />}
         label="分类"
         sx={tabSx} 

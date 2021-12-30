@@ -1,8 +1,9 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import './App.css'
 import RouteTabs from './component/nav/RouteTabs'
 import ClassMgt from './component/class/ClassMgt'
 import ContentMgt from './component/content/ContentMgt'
+import Fields from "./component/fields/Fields"
 
 function App() {
   return (
@@ -12,7 +13,10 @@ function App() {
       </nav>
       <main>
         <Routes>
-          <Route path="/" element={<ClassMgt />} />
+          <Route index element={<Navigate to="/entity" replace={true} />} />
+          <Route path="/entity" element={<ClassMgt />} >
+            <Route path=":entityId" element={<Fields />} />
+          </Route>
           <Route path="/contents" element={<ContentMgt />} />
         </Routes>
       </main>

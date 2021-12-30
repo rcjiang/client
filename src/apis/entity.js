@@ -1,6 +1,6 @@
 
 function getEntityList() {
-  return fetch('./api/entityList').then(res => {
+  return fetch('/api/entityList').then(res => {
     const data = res.json()
     return data
   })

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from "react-router-dom"
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -7,7 +8,8 @@ import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import IconButton from '@mui/material/IconButton'
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import { getFields } from '../../apis/field'
 
 const columns = [
   { id: 'fieldName', label: '字段名', minWidth: 170 },
@@ -36,9 +38,17 @@ function EditBtn({click}) {
   )
 }
 
-function Fields({ data }) {
+function Fields() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [data, setData] = useState([])
+  const { entityId } = useParams()
+
+  useEffect(() => {
+    getFields(entityId).then(data => {
+      setData(data)
+    })
+  }, [entityId]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
