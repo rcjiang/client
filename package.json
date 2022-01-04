@@ -1,5 +1,5 @@
 {
-  "name": "classify",
+  "name": "knote-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

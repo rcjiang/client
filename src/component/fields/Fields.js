@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -43,6 +43,7 @@ function Fields() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [data, setData] = useState([])
   const { entityId } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getFields(entityId).then(data => {
@@ -60,7 +61,7 @@ function Fields() {
   };
 
   const edit = (id) => {
-
+    navigate(String(id))
   }
 
   return (
