@@ -5,4 +5,14 @@ function getFields (parent = '') {
   })
 }
 
-export { getFields }
+function getField (id) {
+  return fetch(`/api/field/${id}`).then(res => {
+    const data = res.json()
+    return data
+  })
+}
+
+export {
+  getFields,
+  getField
+}
