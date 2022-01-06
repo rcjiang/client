@@ -5,6 +5,8 @@ import ClassMgt from './component/class/ClassMgt'
 import ContentMgt from './component/content/ContentMgt'
 import Fields from "./component/fields/Fields"
 import Field from "./component/fields/Field"
+import Contents from './component/content/Contents'
+import Content from './component/content/Content'
 
 function App() {
   return (
@@ -21,7 +23,12 @@ function App() {
               <Route path=":fieldId" element={<Field />} />
             </Route>
           </Route>
-          <Route path="/contents" element={<ContentMgt />} />
+          <Route path="/contents" element={<ContentMgt />} >
+            <Route path=":catalogId" element={<Outlet />}>
+              <Route index element={<Contents />} />
+              <Route path=":contendId" element={<Content />} />
+            </Route>
+          </Route>
         </Routes>
       </main>
     </div>
