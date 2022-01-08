@@ -1,13 +1,16 @@
-import * as React from 'react'
+import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { AppBar, Box, Tabs, Tab } from '@mui/material'
 import CatalogTree from './CatalogTree'
 
 function Catalog() {
-  const [value, setValue] = React.useState('1');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const id = searchParams.id || '1';
+  const [value, setValue] = useState(id)
 
-  const handleChange = (event, newValue) => {
-    console.log(newValue)
-    setValue(newValue)
+  const handleChange = (event, id) => {
+    setSearchParams({ id })
+    setValue(id)
   }
 
   return (

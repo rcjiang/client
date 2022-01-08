@@ -24,10 +24,8 @@ function App() {
             </Route>
           </Route>
           <Route path="/contents" element={<ContentMgt />} >
-            <Route path=":catalogId" element={<Outlet />}>
-              <Route index element={<Contents />} />
-              <Route path=":contendId" element={<Content />} />
-            </Route>
+            <Route index element={<Contents />} />
+            <Route path="detail" element={<Content />} />
           </Route>
         </Routes>
       </main>
