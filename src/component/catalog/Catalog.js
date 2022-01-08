@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { AppBar, Box, Tabs, Tab } from '@mui/material'
+import CatalogTree from './CatalogTree'
 
 function Catalog() {
   const [value, setValue] = React.useState('1');
@@ -23,6 +24,7 @@ function Catalog() {
           <Tab label="体裁" value="3" />
         </Tabs>
       </AppBar>
+      <CatalogTree />
     </Box>
   )
 }
