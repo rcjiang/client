@@ -1,18 +1,10 @@
-import { Outlet } from 'react-router-dom';
+import LeftRightRoute from '../layout/LeftRightRoute'
 import Catalog from '../catalog/Catalog';
 
-function ContentMgt () {
+export default function ClassMgt () {
   return (
-    <div
-      className="lay-lf"
-      style={{ width: '100%', overflow: 'hidden' }}
-    >
+    <LeftRightRoute>
       <Catalog />
-      <div style={{padding: '10px', backgroundColor: '#E7EBF0' }}>
-        <Outlet />
-      </div>
-    </div>
+    </LeftRightRoute>
   )
 }
-
-export default ContentMgt

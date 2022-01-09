@@ -1,42 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Outlet, useParams, useNavigate } from 'react-router-dom';
-import Entities from '../entities/Entities';
-import { getEntityList } from '../../apis/entity'
+import LeftRightRoute from '../layout/LeftRightRoute'
+import Entities from '../entities/Entities'
 
-function ClassMgt () {
-  const { entityId } = useParams()
-  const [entityNames, setEntityNames] = useState([])
-  const navigate = useNavigate()
-
-  const changeSelect = id => {
-    navigate(String(id))
-  }
-
-  useEffect(() => {
-    getEntityList().then(data => {
-      setEntityNames(data)
-      const firstEntityId = data[0]?.id
-      if (!entityId && firstEntityId) {
-        navigate(String(firstEntityId))
-      }
-    })
-  }, [entityId, navigate])
-
+export default function ClassMgt () {
   return (
-    <div
-      className="lay-lf"
-      style={{ width: '100%', overflow: 'hidden' }}
-    >
-      <Entities
-        data={entityNames}
-        handleSelect={changeSelect}
-        selected={Number(entityId)}
-      />
-      <div style={{paddingLeft:  '10px' }}>
-        <Outlet />
-      </div>
-    </div>
+    <LeftRightRoute>
+      <Entities />
+    </LeftRightRoute>
   )
 }
-
-export default ClassMgt

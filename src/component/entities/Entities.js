@@ -1,39 +1,36 @@
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { ListItemButton } from '@mui/material';
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import List from '@mui/material/List'
+import { getEntityList } from '../../apis/entity'
+import EntityItem from './EntityItem'
 import './List.css';
 
-function Entities ({ data, selected, handleSelect }) {
-  const Action = (
-    <IconButton edge="end" aria-label="delete" size="small">
-      <DeleteOutlinedIcon />
-    </IconButton>
-  )
+function Entities () {
+  const { entityId } = useParams()
+  const [entityNames, setEntityNames] = useState([])
+  const navigate = useNavigate()
+  const changeSelect = id => {
+    navigate(String(id))
+  }
 
-  const Items = data.map(({ id, name }) => (
-    <ListItem
+  useEffect(() => {
+    getEntityList().then(data => {
+      setEntityNames(data)
+      const firstEntityId = data[0]?.id
+      if (!entityId && firstEntityId) {
+        navigate(String(firstEntityId))
+      }
+    })
+  }, [entityId, navigate])
+
+  const Items = entityNames.map(({ id, name }) => (
+    <EntityItem
       key={id}
-      className="MuiListItem-hover"
-      secondaryAction={ Action }
-      disablePadding
-    >
-      <ListItemButton
-        selected={selected === id}
-        onClick={() => handleSelect(id) }
-      >
-        <ListItemIcon sx={{ minWidth: '36px' }}>
-          <FolderOutlinedIcon />
-        </ListItemIcon>
-        <ListItemText
-          primary={name}
-        />
-      </ListItemButton>
-    </ListItem>
+      id={id}
+      name={name}
+      selected={id === Number(entityId)}
+      changeSelect={() => changeSelect(id)}
+    />
   ))
 
   return (
