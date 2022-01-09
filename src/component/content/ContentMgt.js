@@ -8,7 +8,7 @@ function ContentMgt () {
       style={{ width: '100%', overflow: 'hidden' }}
     >
       <Catalog />
-      <div style={{paddingLeft:  '10px' }}>
+      <div style={{padding: '10px', backgroundColor: '#E7EBF0' }}>
         <Outlet />
       </div>
     </div>
