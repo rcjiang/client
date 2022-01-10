@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, Outlet } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import './App.css'
 import RouteTabs from './component/nav/RouteTabs'
 import ClassMgt from './component/class/ClassMgt'
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route index element={<Navigate to="/entity" replace={true} />} />
           <Route path="/entity" element={<ClassMgt />} >
-            <Route path=":entityId" element={<Outlet />}>
+            <Route path=":entityId">
               <Route index element={<Fields />} />
               <Route path=":fieldId" element={<Field />} />
             </Route>
