@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
-import LeftRight from "./LeftRight";
+import { Outlet } from 'react-router-dom'
+import LeftRight from './LeftRight'
 
 export default function LeftRightRoute ({ children, sx }) {
   const style = {

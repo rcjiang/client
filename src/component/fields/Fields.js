@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from 'react-router-dom'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -23,7 +23,7 @@ const columns = [
     label: '操作',
     minWidth: 100
   }
-];
+]
 
 function EditBtn({click}) {
   return (
@@ -39,8 +39,8 @@ function EditBtn({click}) {
 }
 
 function Fields() {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [data, setData] = useState([])
   const { entityId } = useParams()
   const navigate = useNavigate()
@@ -49,16 +49,16 @@ function Fields() {
     getFields(entityId).then(data => {
       setData(data)
     })
-  }, [entityId]);
+  }, [entityId])
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   const edit = (id) => {
     navigate(String(id))
@@ -88,7 +88,7 @@ function Fields() {
                 return (
                   <TableRow hover tabIndex={-1} key={row.id}>
                     { columns.map((column) => {
-                      let cellContent = row[column.id];
+                      let cellContent = row[column.id]
                       if (column.id === 'operate') {
                         cellContent = <EditBtn click={() => edit(row.id)} />
                       }
@@ -97,11 +97,11 @@ function Fields() {
                         <TableCell key={column.id} align={column.align}>
                           { cellContent }
                         </TableCell>
-                      );
+                      )
                     })
                     }
                   </TableRow>
-                );
+                )
               })}
           </TableBody>
         </Table>
@@ -116,7 +116,7 @@ function Fields() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </>
-  );
+  )
 }
 
 export default Fields

@@ -8,7 +8,7 @@ function CircularIndeterminate() {
     <Box sx={{ display: 'flex' }}>
       <CircularProgress />
     </Box>
-  );
+  )
 }
 
 function LazyElement ({ load }) {

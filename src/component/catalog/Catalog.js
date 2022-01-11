@@ -4,8 +4,8 @@ import { AppBar, Box, Tabs, Tab } from '@mui/material'
 import CatalogTree from './CatalogTree'
 
 function Catalog() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const id = searchParams.id || '1';
+  const [searchParams, setSearchParams] = useSearchParams()
+  const id = searchParams.id || '1'
   const [value, setValue] = useState(id)
 
   const handleChange = (event, id) => {

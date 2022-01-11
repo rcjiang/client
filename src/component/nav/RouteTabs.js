@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Tab, Tabs } from '@mui/material';
-import FitbitIcon from '@mui/icons-material/Fitbit';
-import AppsIcon from '@mui/icons-material/Apps';
+import React, { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { Tab, Tabs } from '@mui/material'
+import FitbitIcon from '@mui/icons-material/Fitbit'
+import AppsIcon from '@mui/icons-material/Apps'
 
 const menus = [
   {
@@ -15,14 +15,14 @@ const menus = [
     icon: <AppsIcon />,
     label: '内容'
   }
-];
+]
 
 function RouteTabs () {
   const { pathname } = useLocation()
   const tabIndex = menus.findIndex(item => pathname.startsWith(item.to))
   const [value, setValue] = useState(tabIndex < 0 ? 0 : tabIndex)
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setValue(newValue)
   }
   const tabSx = { padding: '4px', minWidth: '60px' }
   return (
@@ -46,4 +46,4 @@ function RouteTabs () {
   )
 }
 
-export default RouteTabs;
+export default RouteTabs

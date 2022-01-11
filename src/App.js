@@ -1,6 +1,6 @@
 import './App.css'
 import RouteTabs from './component/nav/RouteTabs'
-import Routes from './route';
+import Routes from './route'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Routes />
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

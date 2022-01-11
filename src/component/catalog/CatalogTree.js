@@ -1,19 +1,19 @@
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import TreeView from '@mui/lab/TreeView';
-import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
-import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types'
+import { styled } from '@mui/material/styles'
+import Box from '@mui/material/Box'
+import TreeView from '@mui/lab/TreeView'
+import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem'
+import Typography from '@mui/material/Typography'
 
-import MailIcon from '@mui/icons-material/Mail';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Label from '@mui/icons-material/Label';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import InfoIcon from '@mui/icons-material/Info';
-import ForumIcon from '@mui/icons-material/Forum';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import MailIcon from '@mui/icons-material/Mail'
+import DeleteIcon from '@mui/icons-material/Delete'
+import Label from '@mui/icons-material/Label'
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'
+import InfoIcon from '@mui/icons-material/Info'
+import ForumIcon from '@mui/icons-material/Forum'
+import LocalOfferIcon from '@mui/icons-material/LocalOffer'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
   color: theme.palette.text.secondary,
@@ -45,7 +45,7 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
       paddingLeft: theme.spacing(2)
     },
   },
-}));
+}))
 
 function StyledTreeItem(props) {
   const {
@@ -55,7 +55,7 @@ function StyledTreeItem(props) {
     labelInfo,
     labelText,
     ...other
-  } = props;
+  } = props
 
   return (
     <StyledTreeItemRoot
@@ -76,7 +76,7 @@ function StyledTreeItem(props) {
       }}
       {...other}
     />
-  );
+  )
 }
 
 StyledTreeItem.propTypes = {
@@ -85,7 +85,7 @@ StyledTreeItem.propTypes = {
   labelIcon: PropTypes.elementType.isRequired,
   labelInfo: PropTypes.string,
   labelText: PropTypes.string.isRequired,
-};
+}
 
 export default function GmailTreeView() {
   return (
@@ -135,5 +135,5 @@ export default function GmailTreeView() {
       </StyledTreeItem>
       <StyledTreeItem nodeId="4" labelText="History" labelIcon={Label} />
     </TreeView>
-  );
+  )
 }

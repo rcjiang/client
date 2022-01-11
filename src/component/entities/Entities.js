@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import List from '@mui/material/List'
 import { getEntityList } from '../../apis/entity'
 import EntityItem from './EntityItem'
-import './List.css';
+import './List.css'
 
 function Entities () {
   const { entityId } = useParams()
