@@ -5,13 +5,7 @@ import TreeView from '@mui/lab/TreeView'
 import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem'
 import Typography from '@mui/material/Typography'
 
-import MailIcon from '@mui/icons-material/Mail'
-import DeleteIcon from '@mui/icons-material/Delete'
 import Label from '@mui/icons-material/Label'
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'
-import InfoIcon from '@mui/icons-material/Info'
-import ForumIcon from '@mui/icons-material/Forum'
-import LocalOfferIcon from '@mui/icons-material/LocalOffer'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 
@@ -87,64 +81,7 @@ StyledTreeItem.propTypes = {
   labelText: PropTypes.string.isRequired,
 }
 
-const data = [
-  {
-    id: '1',
-    label: 'All Mail',
-    icon: MailIcon
-  },
-  {
-    id: '2',
-    label: 'Trash',
-    icon: DeleteIcon
-  },
-  {
-    id: '3',
-    label: 'Categories',
-    icon: Label,
-    children: [
-      {
-        id: '5',
-        label: 'Social',
-        icon: SupervisorAccountIcon,
-        labelInfo: '90',
-        color: '#1a73e8',
-        bgColor: '#e8f0fe'
-      },
-      {
-        id: '6',
-        label: 'Updates',
-        icon: InfoIcon,
-        labelInfo: '2,294',
-        color: '#e3742f',
-        bgColor: '#fcefe3'
-      },
-      {
-        id: '7',
-        label: 'Forums',
-        icon: ForumIcon,
-        labelInfo: '3,566',
-        color: '#a250f5',
-        bgColor: '#f3e8fd'
-      },
-      {
-        id: '8',
-        label: 'Promotions',
-        icon: LocalOfferIcon,
-        labelInfo: '733',
-        color: '#3c8039',
-        bgColor: '#e6f4ea'
-      }
-    ]
-  },
-  {
-    id: '4',
-    label: 'History',
-    icon: Label
-  }
-]
-
-export default function CatallogTree({ config, nodes = data }) {
+export default function CatallogTree({ config = {}, nodes = [] }) {
   const defaultConfig = {
     defaultExpanded: [],
     defaultCollapseIcon: <ArrowDropDownIcon />,

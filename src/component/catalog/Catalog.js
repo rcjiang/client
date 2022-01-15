@@ -1,12 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { AppBar, Box, Tabs, Tab } from '@mui/material'
 import CatalogTree from './CatalogTree'
+
+import { getCatalog } from '../../apis/catalog'
 
 function Catalog() {
   const [searchParams, setSearchParams] = useSearchParams()
   const id = searchParams.id || '1'
   const [value, setValue] = useState(id)
+  const [catalogs, setCatalogs] = useState([])
+
+  useEffect(() => {
+    getCatalog(id).then(data => {
+      setCatalogs(data)
+    })
+  }, [id])
 
   const handleChange = (event, id) => {
     setSearchParams({ id })
@@ -27,7 +36,7 @@ function Catalog() {
           <Tab label="体裁" value="3" />
         </Tabs>
       </AppBar>
-      <CatalogTree />
+      <CatalogTree nodes={catalogs} />
     </Box>
   )
 }
