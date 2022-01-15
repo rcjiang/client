@@ -12,10 +12,10 @@ function Catalog() {
   const [catalogs, setCatalogs] = useState([])
 
   useEffect(() => {
-    getCatalog(id).then(data => {
+    getCatalog(value).then(data => {
       setCatalogs(data)
     })
-  }, [id])
+  }, [value])
 
   const handleChange = (event, id) => {
     setSearchParams({ id })
