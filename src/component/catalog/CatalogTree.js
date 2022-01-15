@@ -146,6 +146,7 @@ const data = [
 
 export default function CatallogTree({ config, nodes = data }) {
   const defaultConfig = {
+    defaultExpanded: [],
     defaultCollapseIcon: <ArrowDropDownIcon />,
     defaultExpandIcon: <ArrowRightIcon />,
     defaultEndIcon: <div style={{ width: 24 }} />,
@@ -187,7 +188,6 @@ export default function CatallogTree({ config, nodes = data }) {
 
   return (
     <TreeView
-      defaultExpanded={['3']}
       {...treeConfig}
     >
       {createNode(nodes)}
