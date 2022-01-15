@@ -87,53 +87,110 @@ StyledTreeItem.propTypes = {
   labelText: PropTypes.string.isRequired,
 }
 
-export default function GmailTreeView() {
+const data = [
+  {
+    id: '1',
+    label: 'All Mail',
+    icon: MailIcon
+  },
+  {
+    id: '2',
+    label: 'Trash',
+    icon: DeleteIcon
+  },
+  {
+    id: '3',
+    label: 'Categories',
+    icon: Label,
+    children: [
+      {
+        id: '5',
+        label: 'Social',
+        icon: SupervisorAccountIcon,
+        labelInfo: '90',
+        color: '#1a73e8',
+        bgColor: '#e8f0fe'
+      },
+      {
+        id: '6',
+        label: 'Updates',
+        icon: InfoIcon,
+        labelInfo: '2,294',
+        color: '#e3742f',
+        bgColor: '#fcefe3'
+      },
+      {
+        id: '7',
+        label: 'Forums',
+        icon: ForumIcon,
+        labelInfo: '3,566',
+        color: '#a250f5',
+        bgColor: '#f3e8fd'
+      },
+      {
+        id: '8',
+        label: 'Promotions',
+        icon: LocalOfferIcon,
+        labelInfo: '733',
+        color: '#3c8039',
+        bgColor: '#e6f4ea'
+      }
+    ]
+  },
+  {
+    id: '4',
+    label: 'History',
+    icon: Label
+  }
+]
+
+export default function CatallogTree({ config, nodes = data }) {
+  const defaultConfig = {
+    defaultCollapseIcon: <ArrowDropDownIcon />,
+    defaultExpandIcon: <ArrowRightIcon />,
+    defaultEndIcon: <div style={{ width: 24 }} />,
+    sx: {
+      flexGrow: 1,
+      maxWidth: 400,
+      overflowY: 'auto'
+    }
+  }
+
+  const treeConfig = {
+    ...defaultConfig,
+    ...config
+  }
+
+  const createNode = (list) => {
+    return list.map(item => {
+      const {
+        id: nodeId,
+        label: labelText,
+        icon: labelIcon,
+        children,
+        ...others
+      } = item
+
+      return (
+        <StyledTreeItem
+          key={nodeId}
+          nodeId={nodeId}
+          labelText={labelText}
+          labelIcon={labelIcon || Label}
+          {...others}
+        >
+          {children && createNode(children)}
+        </StyledTreeItem>
+      )
+    })
+  }
+
   return (
     <TreeView
-      aria-label="gmail"
       defaultExpanded={['3']}
-      defaultCollapseIcon={<ArrowDropDownIcon />}
-      defaultExpandIcon={<ArrowRightIcon />}
-      defaultEndIcon={<div style={{ width: 24 }} />}
-      sx={{ height: 264, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
+      {...treeConfig}
     >
-      <StyledTreeItem nodeId="1" labelText="All Mail" labelIcon={MailIcon} />
-      <StyledTreeItem nodeId="2" labelText="Trash" labelIcon={DeleteIcon} />
-      <StyledTreeItem nodeId="3" labelText="Categories" labelIcon={Label}>
-        <StyledTreeItem
-          nodeId="5"
-          labelText="Social"
-          labelIcon={SupervisorAccountIcon}
-          labelInfo="90"
-          color="#1a73e8"
-          bgColor="#e8f0fe"
-        />
-        <StyledTreeItem
-          nodeId="6"
-          labelText="Updates"
-          labelIcon={InfoIcon}
-          labelInfo="2,294"
-          color="#e3742f"
-          bgColor="#fcefe3"
-        />
-        <StyledTreeItem
-          nodeId="7"
-          labelText="Forums"
-          labelIcon={ForumIcon}
-          labelInfo="3,566"
-          color="#a250f5"
-          bgColor="#f3e8fd"
-        />
-        <StyledTreeItem
-          nodeId="8"
-          labelText="Promotions"
-          labelIcon={LocalOfferIcon}
-          labelInfo="733"
-          color="#3c8039"
-          bgColor="#e6f4ea"
-        />
-      </StyledTreeItem>
-      <StyledTreeItem nodeId="4" labelText="History" labelIcon={Label} />
+      {createNode(nodes)}
     </TreeView>
   )
 }
