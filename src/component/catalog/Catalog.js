@@ -12,9 +12,10 @@ function Catalog() {
   const [catalogs, setCatalogs] = useState([])
 
   useEffect(() => {
-    getCatalog(value).then(data => {
-      setCatalogs(data)
-    })
+    getCatalog(value)
+      .then(data => {
+        setCatalogs(data)
+      })
   }, [value])
 
   const handleChange = (event, id) => {
