@@ -6,35 +6,40 @@ import CatalogTree from './CatalogTree'
 import { getCatalog } from '../../apis/catalog'
 
 function Catalog() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const id = searchParams.id || '1'
-  const [value, setValue] = useState(id)
+  let [searchParams, setSearchParams] = useSearchParams()
+  const [rootId, setRootId] = useState('')
+  const [roots, setRoots] = useState([])
   const [catalogs, setCatalogs] = useState([])
 
   useEffect(() => {
-    getCatalog(value)
+    const catalog = searchParams.get('catalog')
+    getCatalog(catalog)
       .then(data => {
-        setCatalogs(data)
+        const { list, match } = data
+        const root = match?.parents?.[0] || match?.id || list[0]?.id
+        setRootId(root)
+        setRoots(list)
+        setCatalogs(list.find(item => item.id === root).children)
       })
-  }, [value])
+  },[searchParams])
 
   const handleChange = (event, id) => {
-    setSearchParams({ id })
-    setValue(id)
+    setSearchParams({ catalog: id })
+    setRootId(id)
   }
 
   return (
     <Box sx={{ width: '100%' }}>
       <AppBar position="static">
         <Tabs
-          value={value}
+          value={rootId}
           onChange={handleChange}
           textColor="inherit"
           indicatorColor="secondary"
         >
-          <Tab label="作者" value="1" />
-          <Tab label="年代" value="2" />
-          <Tab label="体裁" value="3" />
+          {roots.map(({ id, label, }) => (
+            <Tab key={id} value={id} label={label} />
+          ))}
         </Tabs>
       </AppBar>
       <CatalogTree nodes={catalogs} />
