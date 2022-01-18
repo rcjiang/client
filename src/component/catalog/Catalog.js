@@ -7,12 +7,12 @@ import { getCatalog } from '../../apis/catalog'
 
 function Catalog() {
   let [searchParams, setSearchParams] = useSearchParams()
+  const catalog = searchParams.get('catalog')
   const [rootId, setRootId] = useState('')
   const [roots, setRoots] = useState([])
   const [catalogs, setCatalogs] = useState([])
 
-  useEffect(() => {
-    const catalog = searchParams.get('catalog')
+  useEffect(() => { 
     getCatalog(catalog)
       .then(data => {
         const { list, match } = data
@@ -21,11 +21,18 @@ function Catalog() {
         setRoots(list)
         setCatalogs(list.find(item => item.id === root).children)
       })
-  },[searchParams])
+  },[catalog])
 
   const handleChange = (event, id) => {
     setSearchParams({ catalog: id })
     setRootId(id)
+  }
+
+  const treeConfig = {
+    selected: catalog,
+    onNodeSelect: (event, value) => {
+      setSearchParams({ catalog: value })
+    }
   }
 
   return (
@@ -42,7 +49,10 @@ function Catalog() {
           ))}
         </Tabs>
       </AppBar>
-      <CatalogTree nodes={catalogs} />
+      <CatalogTree
+        config={treeConfig}
+        nodes={catalogs}
+      />
     </Box>
   )
 }
