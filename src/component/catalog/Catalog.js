@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { AppBar, Box, Tabs, Tab } from '@mui/material'
+import StyledTreeItem from './StyledTreeItem'
 import CatalogTree from './CatalogTree'
 
 import { getCatalog } from '../../apis/catalog'
@@ -52,6 +53,7 @@ function Catalog() {
       <CatalogTree
         config={treeConfig}
         nodes={catalogs}
+        TItem={StyledTreeItem}
       />
     </Box>
   )
