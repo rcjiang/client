@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem'
 import Typography from '@mui/material/Typography'
+import Label from '@mui/icons-material/Label'
 
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
   color: theme.palette.text.secondary,
@@ -40,9 +41,9 @@ function StyledTreeItem(props) {
   const {
     bgColor,
     color,
-    labelIcon: LabelIcon,
-    labelInfo,
-    labelText,
+    icon: LabelIcon,
+    info,
+    label,
     ...other
   } = props
 
@@ -50,12 +51,12 @@ function StyledTreeItem(props) {
     <StyledTreeItemRoot
       label={
         <Box sx={{ display: 'flex', alignItems: 'center', p: 0.5, pr: 0 }}>
-          <Box component={LabelIcon} color="inherit" sx={{ mr: 1 }} />
+          <Box component={LabelIcon || Label} color="inherit" sx={{ mr: 1 }} />
           <Typography variant="body2" sx={{ fontWeight: 'inherit', flexGrow: 1 }}>
-            {labelText}
+            {label}
           </Typography>
           <Typography variant="caption" color="inherit">
-            {labelInfo}
+            {info}
           </Typography>
         </Box>
       }
@@ -71,9 +72,9 @@ function StyledTreeItem(props) {
 StyledTreeItem.propTypes = {
   bgColor: PropTypes.string,
   color: PropTypes.string,
-  labelIcon: PropTypes.elementType.isRequired,
-  labelInfo: PropTypes.string,
-  labelText: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
+  info: PropTypes.string,
+  label: PropTypes.string.isRequired,
 }
 
 export default StyledTreeItem

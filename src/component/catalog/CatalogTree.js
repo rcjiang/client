@@ -1,6 +1,5 @@
 import TreeView from '@mui/lab/TreeView'
 import TreeItem from '@mui/lab/TreeItem'
-import Label from '@mui/icons-material/Label'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 
@@ -35,9 +34,9 @@ export default function CatallogTree({ config = {}, nodes = [], TItem = TreeItem
       return (
         <TItem
           key={id}
-          nodeId={id}
-          labelText={label}
-          labelIcon={icon || Label}
+          nodeId={String(id)}
+          label={label}
+          icon={icon}
           {...others}
         >
           {children && createNode(children)}
