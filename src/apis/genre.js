@@ -1,11 +1,11 @@
-function addGenare (data) {
+function addGenre (data) {
   return fetch('/api/genre', {
     method: 'PUT',
     body: JSON.stringify(data)
   })
 }
 
-function delGenare (id) {
+function delGenre (id) {
   return fetch(`/api/genre?id=${id}`, {
     method: 'DELETE'
   })
@@ -19,7 +19,7 @@ function getGenre (id) {
 }
 
 function getGenres () {
-  return fetch('/api/genres').then(res => {
+  return fetch('/api/genre/list').then(res => {
     const data = res.json()
     return data
   })
@@ -27,8 +27,8 @@ function getGenres () {
 
 
 export {
-  addGenare,
-  delGenare,
+  addGenre,
+  delGenre,
   getGenre,
   getGenres,
 }
