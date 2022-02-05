@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Tab, Tabs } from '@mui/material'
 import FitbitIcon from '@mui/icons-material/Fitbit'
 import AppsIcon from '@mui/icons-material/Apps'
+import AcUnitIcon from '@mui/icons-material/AcUnit'
 
 const menus = [
   {
@@ -14,13 +15,23 @@ const menus = [
     to: '/contents',
     icon: <AppsIcon />,
     label: '内容'
+  },
+  {
+    to: '/genre',
+    icon: <AcUnitIcon />,
+    label: '体裁'
   }
 ]
 
 function RouteTabs () {
+  const [value, setValue] = useState(0)
   const { pathname } = useLocation()
   const tabIndex = menus.findIndex(item => pathname.startsWith(item.to))
-  const [value, setValue] = useState(tabIndex < 0 ? 0 : tabIndex)
+  useEffect(() => {
+    if (tabIndex > -1) {
+      setValue(tabIndex)
+    }
+  }, [tabIndex])
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
