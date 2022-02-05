@@ -23,7 +23,7 @@ function LazyElement ({ load }) {
 const routes = [
   {
     index: true,
-    element: <Navigate to="/entity" replace={true} />
+    element: <Navigate to="/genre" replace={true} />
   },
   {
     path: '/entity',
@@ -57,6 +57,10 @@ const routes = [
         elment: <LazyElement load={() => import('../component/content/Content')} />
       }
     ]
+  },
+  {
+    path: '/genre',
+    element: <LazyElement load={() => import('../view/genre/GenreEditor')} />
   }
 ]
 
