@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
@@ -7,14 +7,29 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
+import { getListNotChildren } from '../../utils/tree'
 
 export default function GenreDialog({ close, confirm, data, parents, open = false, isAdd = false }) {
-  const emptyData = {
+  const emptyData = useMemo(() => ({
     id: '',
     name: '',
     parent: ''
-  }
-  const [form, setForm] = useState(isAdd ? emptyData : (data || emptyData))
+  }),[])
+  const [form, setForm] = useState(emptyData)
+  useEffect(() => {
+    if (isAdd) {
+      setForm(emptyData)
+      return
+    }
+    setForm(data || emptyData)
+  },[isAdd, data, emptyData, open])
+
+  const [parentOptions, setParentOptions] = useState(parents)
+  useEffect(() => {
+    if (open) {
+      setParentOptions(getListNotChildren(parents, data?.id))
+    }
+  }, [parents, data, open])
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -55,7 +70,7 @@ export default function GenreDialog({ close, confirm, data, parents, open = fals
               size='small'
               onChange={handleChange}
             >
-              {parents.map(({ id, name }) => 
+              {parentOptions.map(({ id, name }) => 
                 <MenuItem key={id} value={id}>{name}</MenuItem>
               )}
             </TextField>

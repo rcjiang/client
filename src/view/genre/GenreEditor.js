@@ -3,12 +3,14 @@ import Box from '@mui/material/Box'
 import { Button } from '@mui/material'
 import CatalogTree from '../../component/catalog/CatalogTree'
 import * as genreApi from '../../apis/genre'
+import { getTree } from '../../utils/tree'
 import GenreDialog from './GenreDialog'
 
 export default function CatalogEditor () {
   const [id, setId] = useState('')
   const [genre, setGenre] = useState(null)
-  const [genres, setGenres] = useState([])
+  const [genreList, setGenreList] = useState([])
+  const [genreTree, setGenreTree] = useState([])
   const [open, setOpen] = useState(false)
   const [isAdd, setIsAdd] = useState(false)
   const treeConfig = {
@@ -20,7 +22,15 @@ export default function CatalogEditor () {
 
   const query = () => {
     genreApi.getGenres().then(data => {
-      setGenres(data)
+      setGenreList(data)
+      const treeList = data.map(item => {
+        const { name, ...others } = item
+        return {
+          ...others,
+          label: name
+        }
+      })
+      setGenreTree(getTree(treeList))
     })
   }
 
@@ -29,8 +39,9 @@ export default function CatalogEditor () {
       console.error('体裁名不能为空!')
       return
     }
-    return genreApi.addGenare(data).then(() => {
+    return genreApi.addGenre(data).then(() => {
       setOpen(false)
+      query()
     })
   }
 
@@ -45,15 +56,15 @@ export default function CatalogEditor () {
   }
 
   const handleDel = () => {
-    genreApi.delGenare(id).then(() => {
-
+    genreApi.delGenre(id).then(() => {
+      query()
     })
   }
 
   useEffect(() => query(), [])
   useEffect(() => {
-    setGenre(genres.find(item => item.id === id))
-  }, [id, genres])
+    setGenre(genreList.find(item => item.id === Number(id)))
+  }, [id, genreList])
 
   return (
     <Box sx={{ height: 270, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}>
@@ -64,7 +75,7 @@ export default function CatalogEditor () {
       </Box>
       <CatalogTree
         config={treeConfig}
-        nodes={genres}
+        nodes={genreTree}
       />
       <GenreDialog
         open={open}
@@ -72,7 +83,7 @@ export default function CatalogEditor () {
         close={() => setOpen(false)}
         confirm={save}
         data={genre}
-        parents={genres}
+        parents={genreList}
       />
     </Box>
   )
