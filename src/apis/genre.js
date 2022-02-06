@@ -1,7 +1,10 @@
 function addGenre (data) {
   return fetch('/api/genre', {
     method: 'PUT',
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    },
   })
 }
 
